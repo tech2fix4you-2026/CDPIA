@@ -27,3 +27,7 @@ htmlcov/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Livrables, documents stratégiques et médias
+Documents/
+
