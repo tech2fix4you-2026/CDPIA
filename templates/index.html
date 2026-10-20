@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CDPIA - Bibliothèque</title>
     <script src="https://cdn.tailwindcss.com"></script>
+<link rel="manifest" href="/static/manifest.json">
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/static/sw.js");
+}
+</script>
 </head>
 <body class="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 min-h-screen font-sans text-slate-800 selection:bg-indigo-200 flex flex-col justify-between">
     <div class="max-w-7xl w-full mx-auto px-6 py-8 flex-grow">
@@ -98,5 +104,6 @@
             <p class="text-[11px] text-slate-500">© 2026 Humans & AI Inc. Tous droits réservés.</p>
         </div>
     </footer>
+<script src="/static/cdpia-features.js" defer></script>
 </body>
 </html>
