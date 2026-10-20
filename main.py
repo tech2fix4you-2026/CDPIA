@@ -8,30 +8,23 @@ app = FastAPI(title="CDPIA - Diagnostic IA pour PME")
 
 templates = Jinja2Templates(directory="templates")
 
-class DiagnosticInput(BaseModel):
-    company_name: str
-    contact_email: EmailStr
-    sector: str
-    needs: str
-
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
-    # Correction de la signature TemplateResponse
     return templates.TemplateResponse(request=request, name="index.html")
 
-@app.post("/diagnostic")
+@app.post("/diagnostic", response_class=HTMLResponse)
 async def submit_diagnostic(
+    request: Request,
     company_name: str = Form(...),
     contact_email: str = Form(...),
     sector: str = Form(...),
     needs: str = Form(...)
 ):
-    return {
-        "status": "success",
-        "message": f"Diagnostic initié pour {company_name}",
-        "recipient": contact_email,
-        "details": {"sector": sector, "needs": needs}
-    }
+    return templates.TemplateResponse(
+        request=request, 
+        name="success.html", 
+        context={"company_name": company_name, "contact_email": contact_email}
+    )
 
 @app.get("/healthz")
 async def health_check():
