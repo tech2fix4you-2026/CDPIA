@@ -9,7 +9,7 @@
 <body class="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 min-h-screen font-sans text-slate-800 selection:bg-indigo-200">
     <div class="max-w-7xl mx-auto px-6 py-10">
         
-        <!-- En-tête : Logos Humans & AI et CDPIA -->
+        <!-- En-tête : Logos Humans & AI et CDPIA (Vectoriels Inline) -->
         <header class="flex flex-wrap justify-between items-center gap-6 mb-12 pb-6 border-b border-indigo-100/60">
             <!-- Logo Humans & AI -->
             <a href="/" class="flex items-center gap-3 group">
@@ -23,9 +23,18 @@
                 <div class="text-2xl font-black tracking-tight text-slate-900">Humans <span class="text-indigo-600">&</span> AI</div>
             </a>
 
-            <!-- Logo CDPIA avec SVG -->
+            <!-- Logo CDPIA Inline SVG -->
             <div class="flex items-center">
-                <img src="/static/images/logo_cdpia.svg" alt="CDPIA" class="h-9 w-auto object-contain">
+                <svg viewBox="0 0 320 60" class="h-10 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Chevrons CDPIA -->
+                    <path d="M12 14 L28 30 L12 46" stroke="#0284c7" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M30 14 L46 30 L30 46" stroke="#0ea5e9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M48 14 L64 30 L48 46" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Pastille bleue -->
+                    <rect x="80" y="24" width="34" height="13" rx="6.5" fill="#0369a1"/>
+                    <!-- Typographie CDPIA -->
+                    <text x="130" y="39" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="28" fill="#0f172a" letter-spacing="2">CDPIA</text>
+                </svg>
             </div>
         </header>
 
