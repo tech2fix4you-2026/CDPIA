@@ -7,10 +7,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 min-h-screen font-sans text-slate-800 selection:bg-indigo-200">
-    <div class="max-w-7xl mx-auto px-6 py-10">
+    <div class="max-w-7xl mx-auto px-6 py-8">
         
         <!-- En-tête : Logos Humans & AI et CDPIA (Vectoriels Inline) -->
-        <header class="flex flex-wrap justify-between items-center gap-6 mb-12 pb-6 border-b border-indigo-100/60">
+        <header class="flex flex-wrap justify-between items-center gap-6 mb-10 pb-5 border-b border-indigo-100/60">
             <!-- Logo Humans & AI -->
             <a href="/" class="flex items-center gap-3 group">
                 <div class="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center p-2 shadow-sm group-hover:scale-105 transition-transform">
@@ -38,11 +38,11 @@
             </div>
         </header>
 
-        <div class="grid lg:grid-cols-12 gap-12 items-start">
+        <div class="grid lg:grid-cols-12 gap-10 items-start">
             
-            <!-- Section Mission (8 colonnes) -->
-            <div class="lg:col-span-8 space-y-6">
-                <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-8 leading-tight">
+            <!-- Section Mission (9 colonnes) -->
+            <div class="lg:col-span-9 space-y-6">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 leading-tight">
                     Raison d'être & Déclaration de Mission
                 </h1>
                 
@@ -59,33 +59,33 @@
                 </p>
 
                 <!-- Citation stylisée -->
-                <blockquote class="mt-8 bg-white/60 backdrop-blur-sm border-l-4 border-pink-400 p-6 rounded-r-2xl shadow-sm relative">
-                    <div class="text-slate-700 italic leading-relaxed relative z-10">
+                <blockquote class="mt-6 bg-white/60 backdrop-blur-sm border-l-4 border-pink-400 p-5 rounded-r-2xl shadow-sm relative">
+                    <div class="text-slate-700 italic leading-relaxed relative z-10 text-sm md:text-base">
                         « Les PME québécoises n’ont pas besoin de rapports d’audit de 80 pages qui dorment sur une tablette, ni de promesses technocratiques », souligne la Direction de l’architecture et des solutions de Humans and AI Inc. « Nos entrepreneurs ont besoin d’outils concrets qui s’intègrent en quelques jours à leurs logiciels existants, amortis en moins de six mois, et qui permettent à leurs commis et techniciens d’atelier de respirer enfin. Avec le CDPIA, nous leur offrons un point de chute neutre, solide et transparent. »
                     </div>
                 </blockquote>
             </div>
 
-            <!-- Formulaire d'accès (4 colonnes) -->
-            <div class="lg:col-span-4 bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white lg:sticky lg:top-12 mt-8 lg:mt-0">
-                <h2 class="text-xl font-bold text-slate-800 mb-1">Accéder à la bibliothèque</h2>
-                <p class="text-slate-500 text-xs mb-5">Remplissez ce formulaire. Nous vous enverrons vos accès par courriel.</p>
+            <!-- Formulaire d'accès compact (3 colonnes, max-w-xs) -->
+            <div class="lg:col-span-3 w-full max-w-xs justify-self-end bg-white/85 backdrop-blur-md p-4 rounded-xl shadow-lg border border-white lg:sticky lg:top-8 mt-6 lg:mt-0">
+                <h2 class="text-base font-bold text-slate-800 mb-1 leading-tight">Accès bibliothèque</h2>
+                <p class="text-slate-500 text-[11px] mb-3 leading-snug">Remplissez ce formulaire pour recevoir vos accès par courriel.</p>
 
-                <form action="request-access" method="post" class="space-y-4">
+                <form action="request-access" method="post" class="space-y-2.5">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">Prénom</label>
-                        <input type="text" name="first_name" required class="w-full rounded-lg border border-white bg-white/60 px-3 py-2 text-sm focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 outline-none transition-all shadow-sm">
+                        <label class="block text-[11px] font-semibold text-slate-700 mb-0.5">Prénom</label>
+                        <input type="text" name="first_name" required class="w-full rounded-md border border-slate-200 bg-white/80 px-2.5 py-1.5 text-xs focus:border-indigo-400 focus:ring-1 focus:ring-indigo-200 outline-none transition-all shadow-sm">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">Nom</label>
-                        <input type="text" name="last_name" required class="w-full rounded-lg border border-white bg-white/60 px-3 py-2 text-sm focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 outline-none transition-all shadow-sm">
+                        <label class="block text-[11px] font-semibold text-slate-700 mb-0.5">Nom</label>
+                        <input type="text" name="last_name" required class="w-full rounded-md border border-slate-200 bg-white/80 px-2.5 py-1.5 text-xs focus:border-indigo-400 focus:ring-1 focus:ring-indigo-200 outline-none transition-all shadow-sm">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">Adresse courriel</label>
-                        <input type="email" name="email" required class="w-full rounded-lg border border-white bg-white/60 px-3 py-2 text-sm focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 outline-none transition-all shadow-sm">
+                        <label class="block text-[11px] font-semibold text-slate-700 mb-0.5">Courriel</label>
+                        <input type="email" name="email" required class="w-full rounded-md border border-slate-200 bg-white/80 px-2.5 py-1.5 text-xs focus:border-indigo-400 focus:ring-1 focus:ring-indigo-200 outline-none transition-all shadow-sm">
                     </div>
-                    <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-200 transition-all mt-3 text-sm shadow-md hover:shadow-lg">
-                        Demander mon accès
+                    <button type="submit" class="w-full bg-indigo-600 text-white font-semibold py-1.5 px-3 rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-200 transition-all mt-2 text-xs shadow hover:shadow-md">
+                        Demander l'accès
                     </button>
                 </form>
             </div>
