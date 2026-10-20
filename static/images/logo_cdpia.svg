@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 70" fill="none" class="h-10 w-auto">
+  <!-- Chevrons CDPIA -->
+  <path d="M10 15 L25 35 L10 55" stroke="#0077b6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M28 15 L43 35 L28 55" stroke="#0096c7" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M46 15 L61 35 L46 55" stroke="#48cae4" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Pastille centrale -->
+  <rect x="80" y="27" width="36" height="16" rx="8" fill="#0077b6" />
+  <!-- Typographie CDPIA -->
+  <text x="135" y="46" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="34" fill="#0f172a" letter-spacing="1.5">CDPIA</text>
+</svg>
