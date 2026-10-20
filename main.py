@@ -12,7 +12,9 @@ load_dotenv()
 SMTP_HOST = os.getenv("SMTP_HOST", "smtp.gmail.com")
 SMTP_PORT = int(os.getenv("SMTP_PORT", 587))
 SMTP_USER = os.getenv("SMTP_USER", "contact@humans-and-ai.ca")
-SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
+# Nettoyage des espaces éventuels du mot de passe d'application Google
+SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "").replace(" ", "")
+NOTIFICATION_RECIPIENT = os.getenv("NOTIFICATION_RECIPIENT", "guy@next-ai.ca")
 
 app = FastAPI(title="CDPIA - Bibliothèque IA")
 templates = Jinja2Templates(directory="templates")
@@ -21,61 +23,78 @@ BASE_DOCS = "Documents"
 DIR_DEPART = os.path.join(BASE_DOCS, "Bibliothèque de départ")
 DIR_CONVERTIS = os.path.join(BASE_DOCS, "Bibliothèque clients convertis")
 
-async def envoyer_acces_par_courriel(destinataire: str, nom_complet: str, token: str):
+async def dispatcher_courriels(destinataire: str, nom_complet: str, token: str):
     if not SMTP_PASSWORD:
-        print("[ALERTE] Envoi annulé: SMTP_PASSWORD non configuré.")
+        print("[ALERTE] SMTP_PASSWORD non configuré. Envoi annulé.")
         return
 
     lien_acces = f"https://humans-and-ai.ca/cdpia?token={token}"
 
-    msg = EmailMessage()
-    msg['Subject'] = "Vos accès : Bibliothèque de départ CDPIA"
-    msg['From'] = "demande@humans-and-ai.ca"
-    msg['To'] = destinataire
+    # 1. Courriel envoyé au prospect
+    msg_client = EmailMessage()
+    msg_client['Subject'] = "Vos accès : Bibliothèque de départ CDPIA"
+    msg_client['From'] = "demande@humans-and-ai.ca"
+    msg_client['To'] = destinataire
 
-    contenu_html = f"""
+    html_client = f"""
     <html>
         <body style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
             <p>Bonjour {nom_complet},</p>
             <p>Merci pour votre intérêt envers le Centre de Déploiement Pragmatique de l'IA (CDPIA).</p>
-            <p>Voici votre lien d'accès à la <strong>Bibliothèque de départ</strong> :</p>
+            <p>Voici votre lien d'accès sécurisé à la <strong>Bibliothèque de départ</strong> :</p>
             <p style="margin: 20px 0;">
                 <a href="{lien_acces}" style="background-color: #4f46e5; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">
                     Accéder à mes documents
                 </a>
             </p>
-            <p>Si le bouton ne s'affiche pas, collez ce lien dans votre navigateur :<br>
-            <a href="{lien_acces}" style="color: #4f46e5;">{lien_acces}</a></p>
+            <p>Si le bouton ne fonctionne pas : <a href="{lien_acces}" style="color: #4f46e5;">{lien_acces}</a></p>
             <p>Bonne consultation,</p>
             <p><strong>L'équipe Humans and AI</strong></p>
         </body>
     </html>
     """
-    msg.set_content("Veuillez activer l'affichage HTML pour lire ce courriel.")
-    msg.add_alternative(contenu_html, subtype='html')
+    msg_client.set_content("Veuillez activer l'affichage HTML pour lire ce courriel.")
+    msg_client.add_alternative(html_client, subtype='html')
+
+    # 2. Courriel d'alerte envoyé à l'administrateur
+    msg_admin = EmailMessage()
+    msg_admin['Subject'] = f"[Nouveau Prospect CDPIA] {nom_complet}"
+    msg_admin['From'] = "demande@humans-and-ai.ca"
+    msg_admin['To'] = NOTIFICATION_RECIPIENT
+
+    html_admin = f"""
+    <html>
+        <body style="font-family: Arial, sans-serif; color: #333; line-height: 1.5;">
+            <h3>Nouvelle demande d'accès à la Bibliothèque de départ</h3>
+            <ul>
+                <li><strong>Nom :</strong> {nom_complet}</li>
+                <li><strong>Courriel :</strong> {destinataire}</li>
+                <li><strong>Jeton généré :</strong> {token}</li>
+            </ul>
+        </body>
+    </html>
+    """
+    msg_admin.set_content(f"Nouveau prospect : {nom_complet} ({destinataire})")
+    msg_admin.add_alternative(html_admin, subtype='html')
 
     try:
-        await aiosmtplib.send(
-            msg,
-            hostname=SMTP_HOST,
-            port=SMTP_PORT,
-            start_tls=True,
-            username=SMTP_USER,
-            password=SMTP_PASSWORD,
-        )
-        print(f"[Succès] Accès expédié par courriel à {destinataire}")
+        # Envoi simultané des deux messages
+        await aiosmtplib.send(msg_client, hostname=SMTP_HOST, port=SMTP_PORT, start_tls=True, username=SMTP_USER, password=SMTP_PASSWORD)
+        print(f"[Succès] Accès envoyé au prospect {destinataire}")
+        
+        await aiosmtplib.send(msg_admin, hostname=SMTP_HOST, port=SMTP_PORT, start_tls=True, username=SMTP_USER, password=SMTP_PASSWORD)
+        print(f"[Succès] Notification admin envoyée à {NOTIFICATION_RECIPIENT}")
     except Exception as e:
-        print(f"[Erreur SMTP] Échec lors de l'envoi à {destinataire}: {e}")
+        print(f"[Erreur SMTP] Échec d'envoi : {e}")
 
 @app.get("/", response_class=HTMLResponse)
+@app.get("/cdpia", response_class=HTMLResponse)
 async def read_root(request: Request):
     return templates.TemplateResponse(request=request, name="index.html")
 
-@app.get("/cdpia", response_class=HTMLResponse)
-async def read_cdpia(request: Request):
-    return templates.TemplateResponse(request=request, name="index.html")
-
+# Prise en charge des deux variantes d'URL (avec ou sans préfixe /cdpia)
 @app.post("/request-access", response_class=HTMLResponse)
+@app.post("/cdpia/request-access", response_class=HTMLResponse)
 async def request_access(
     request: Request,
     background_tasks: BackgroundTasks,
@@ -86,8 +105,7 @@ async def request_access(
     nom_complet = f"{first_name} {last_name}".strip()
     token_prospect = str(uuid.uuid4())
 
-    # Déclenche l'envoi automatisé depuis demande@humans-and-ai.ca
-    background_tasks.add_task(envoyer_acces_par_courriel, email, nom_complet, token_prospect)
+    background_tasks.add_task(dispatcher_courriels, email, nom_complet, token_prospect)
 
     return templates.TemplateResponse(
         request=request,
