@@ -1,0 +1,15 @@
+services:
+  cdpia-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cdpia-app
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8181:8000"
+    environment:
+      - PORT=8000
+      - PYTHONUNBUFFERED=1
+    env_file:
+      - .env
+

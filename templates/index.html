@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDPIA - Diagnostic IA pour PME</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen p-4">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-lg">
+        <h1 class="text-2xl font-bold text-center text-slate-800 mb-2">Diagnostic IA pour PME</h1>
+        <p class="text-center text-slate-500 mb-6 text-sm">Découvrez comment l'intelligence artificielle peut optimiser vos processus.</p>
+        
+        <form action="/diagnostic" method="post" class="space-y-4">
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Nom de l'entreprise</label>
+                <input type="text" name="company_name" required class="w-full rounded-md border border-slate-300 px-3 py-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none">
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Courriel de contact</label>
+                <input type="email" name="contact_email" required class="w-full rounded-md border border-slate-300 px-3 py-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none">
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Secteur d'activité</label>
+                <input type="text" name="sector" required class="w-full rounded-md border border-slate-300 px-3 py-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none">
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Besoins ou défis principaux</label>
+                <textarea name="needs" rows="4" required class="w-full rounded-md border border-slate-300 px-3 py-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 transition duration-150 mt-4">
+                Lancer le diagnostic
+            </button>
+        </form>
+    </div>
+</body>
+</html>
