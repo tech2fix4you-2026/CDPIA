@@ -2,9 +2,8 @@ import os
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from pydantic import BaseModel, EmailStr
 
-app = FastAPI(title="CDPIA - Diagnostic IA pour PME")
+app = FastAPI(title="CDPIA - Bibliothèque IA")
 
 templates = Jinja2Templates(directory="templates")
 
@@ -12,18 +11,17 @@ templates = Jinja2Templates(directory="templates")
 async def read_root(request: Request):
     return templates.TemplateResponse(request=request, name="index.html")
 
-@app.post("/diagnostic", response_class=HTMLResponse)
-async def submit_diagnostic(
+@app.post("/request-access", response_class=HTMLResponse)
+async def request_access(
     request: Request,
-    company_name: str = Form(...),
-    contact_email: str = Form(...),
-    sector: str = Form(...),
-    needs: str = Form(...)
+    first_name: str = Form(...),
+    last_name: str = Form(...),
+    email: str = Form(...)
 ):
     return templates.TemplateResponse(
         request=request, 
         name="success.html", 
-        context={"company_name": company_name, "contact_email": contact_email}
+        context={"first_name": first_name, "last_name": last_name, "email": email}
     )
 
 @app.get("/healthz")

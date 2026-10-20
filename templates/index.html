@@ -3,35 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CDPIA - Diagnostic IA pour PME</title>
+    <title>CDPIA - Bibliothèque</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 flex items-center justify-center min-h-screen p-4">
-    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-lg">
-        <h1 class="text-2xl font-bold text-center text-slate-800 mb-2">Diagnostic IA pour PME</h1>
-        <p class="text-center text-slate-500 mb-6 text-sm">Découvrez comment l'intelligence artificielle peut optimiser vos processus.</p>
+<body class="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 min-h-screen font-sans text-slate-800 selection:bg-indigo-200">
+    <div class="max-w-5xl mx-auto px-6 py-12">
         
-        <form action="diagnostic" method="post" class="space-y-4">
+        <!-- En-tête : Les deux logos (à remplacer par des balises <img> avec vos vrais logos) -->
+        <div class="flex justify-between items-center mb-16">
+            <div class="text-2xl font-black tracking-tighter text-slate-800">Humans <span class="text-indigo-600">&</span> AI</div>
+            <div class="text-2xl font-black tracking-tighter text-pink-600">CDPIA</div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            
+            <!-- Section Mission / Explication -->
             <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1">Nom de l'entreprise</label>
-                <input type="text" name="company_name" required class="w-full rounded-md border border-slate-300 px-3 py-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
+                    L'alliance de l'humain <br><span class="text-indigo-600">et de l'intelligence.</span>
+                </h1>
+                <p class="text-lg text-slate-700 mb-6 leading-relaxed">
+                    L'intelligence artificielle ne doit ni remplacer ni déposséder. Elle s'apprivoise à vos côtés. Nous concevons une technologie respectueuse de nos repères, protectrice de notre autonomie et dédiée au bien commun.
+                </p>
+                <p class="text-md text-slate-600 font-medium border-l-4 border-pink-400 pl-4">
+                    Accédez à notre bibliothèque de ressources exclusives et découvrez comment intégrer l'IA à votre rythme.
+                </p>
             </div>
-            <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1">Courriel de contact</label>
-                <input type="email" name="contact_email" required class="w-full rounded-md border border-slate-300 px-3 py-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none">
+
+            <!-- Formulaire d'accès -->
+            <div class="bg-white/70 backdrop-blur-md p-8 rounded-3xl shadow-xl border border-white">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">Accéder à la bibliothèque</h2>
+                <p class="text-slate-500 text-sm mb-6">Remplissez ce formulaire. Nous vous enverrons vos accès par courriel.</p>
+
+                <form action="request-access" method="post" class="space-y-5">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Prénom</label>
+                        <input type="text" name="first_name" required class="w-full rounded-xl border border-white bg-white/60 px-4 py-3 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 outline-none transition-all shadow-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Nom</label>
+                        <input type="text" name="last_name" required class="w-full rounded-xl border border-white bg-white/60 px-4 py-3 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 outline-none transition-all shadow-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Adresse courriel</label>
+                        <input type="email" name="email" required class="w-full rounded-xl border border-white bg-white/60 px-4 py-3 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 outline-none transition-all shadow-sm">
+                    </div>
+                    <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-xl hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-200 transition-all mt-4 shadow-md hover:shadow-lg">
+                        Demander mon accès
+                    </button>
+                </form>
             </div>
-            <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1">Secteur d'activité</label>
-                <input type="text" name="sector" required class="w-full rounded-md border border-slate-300 px-3 py-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none">
-            </div>
-            <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1">Besoins ou défis principaux</label>
-                <textarea name="needs" rows="4" required class="w-full rounded-md border border-slate-300 px-3 py-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"></textarea>
-            </div>
-            <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 transition duration-150 mt-4">
-                Lancer le diagnostic
-            </button>
-        </form>
+        </div>
     </div>
 </body>
 </html>
